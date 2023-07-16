@@ -1,0 +1,64 @@
+<html>
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>The Movies@Mariana</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'jquery.dataTables.min.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{% static 'movies.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap-multiselect.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap-multiselect.min.css' %}">
+
+    <script src="{% static 'jquery-3.7.0.js' %}"></script>
+    <script src="{% static 'jquery.dataTables.min.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{% static 'bootstrap-multiselect.js' %}"></script>
+    <script src="{% static 'filter.js' %}"></script>
+    <script src="{% static 'movies.js' %}"></script>
+</head>
+<body>
+    <div class="page-header">
+        <h1>The Movies@Mariana</h1>
+    </div>
+    <label for="genre-filter">Filter by Genre:</label>
+    <label for="genre-filter">Filter by Genre:</label>
+    <select id="genre-filter" multiple>
+        <option value="all">All Genres</option>
+        {% for genre in genres %}  <!-- Use the sorted list of genres -->
+        <option value="{{ genre }}">{{ genre }}</option>
+        {% endfor %}
+    </select>
+<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+	<thead>
+		<tr>
+			<th>Month</th>
+			<th>Day</th>
+			<th>Title</th>
+			<th>Genre</th>
+			<th>Rating</th>
+            <th>Year Release</th>
+            <th>Metacritic Rating</th>
+            <th>Runtime</th>
+		</tr>
+	</thead>
+	<tbody>
+        {% for entry in json_data %}
+        {% for movie in entry.movies %}
+        <tr>
+            <td>{{ movie.Month }}</td>
+            <td>{{ movie.Day }}</td>
+            <td class="title-cell"> 
+                <img src="{{ movie.poster }}" alt="{{ movie.title }}">
+                {{ movie.title }}
+            </td>
+            <td class="genre-cell">{{ movie.genre|join:", " }}</td>
+            <td>{{ movie.imdb_rating }}</td>
+            <td>{{ movie.year }}</td>
+            <td>{{ movie.meta_score }}</td>
+            <td>{{ movie.runtime }}</td>
+        </tr>
+        {% endfor %}
+        {% endfor %}
+	</tbody>
+</table>
+</body>

@@ -1,0 +1,21 @@
+body {margin:2em;}
+
+.page-header {
+  text-align: center;
+}
+
+td.title-cell {
+  display: flex;
+  align-items: center;
+}
+
+td.title-cell img {
+  margin-right: 10px; /* Add some space between the poster and title */
+  max-height: 50px;
+}
+
+/* Add some padding to the select2 dropdown */
+.select2-container {
+  width: 100% !important;
+  margin-bottom: 10px;
+}
